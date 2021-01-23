@@ -18,7 +18,7 @@ public class EventUserviewDetailController {
 	
 	@RequestMapping("eventViewUserDetail")
 	public String eventList(HttpServletRequest request, Model model, HttpSession session) {
-	
+		session = request.getSession();
 		////////////////
 		String userId = (String) session.getAttribute("userId");
 		String eSeqno = request.getParameter("eSeqno");
@@ -29,9 +29,12 @@ public class EventUserviewDetailController {
 		model.addAttribute("eventList", dao.eventViewDetail(eSeqno));
 		System.out.println("eseqno : " + dao.eventViewDetail(eSeqno).geteFilename());
 		
-		
-		model.addAttribute("participant", dao.participant(request.getParameter("eSeqno"), userId));
-		System.out.println("eseqno : " + dao.participant(request.getParameter("eSeqno"), userId));
+		if(userId.equals("") || userId.equals(null)) {
+			model.addAttribute("participant", 2);
+		} else {
+			model.addAttribute("participant", dao.participant(request.getParameter("eSeqno"), userId));
+			System.out.println("eseqno : " + dao.participant(request.getParameter("eSeqno"), userId));
+		}
 
 		
 		model.addAttribute("eventResultView", dao.WinnerList(request.getParameter("eSeqno")));

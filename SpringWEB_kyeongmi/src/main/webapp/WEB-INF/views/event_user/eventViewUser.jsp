@@ -20,6 +20,10 @@ window.onload = function(){
 			alert("이벤트 참여가 완료되셨습니다.");
 			bName.focus();
 			return true;
+		} else {
+			alert("로그인 후 이용 가능합니다.");
+			bName.focus();
+			return false;
 		}
 	}
 };
@@ -106,11 +110,10 @@ height: 36px;
 </head>
 <%@include file="../main/Header.jsp" %>
 <body>
-${eventList.eSeqno }
 <div id="notice">
 <h2>&nbsp;이벤트 상세 보기</h2><br>
 <div id="home3"><a href="eventList">목 록</a></div>
-	<form id = "eResult" action="#" method="post">
+	<form id = "eResult" action="participateInEvent?eSeqno=${eventList.eSeqno }" method="post">
 	<table>
 	<tr>
 		<td colspan="2">

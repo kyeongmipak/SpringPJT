@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
+<!DOCTYPE html html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" charset="UTF-8">
 <title>이벤트 목록</title>
 <script src="<c:url value="/resources/js/jquery-3.3.1.min.js"/>"></script>
 <style>
@@ -75,6 +75,53 @@ button {
 button:hover {
 	color:#000;
 	background-color:#fff;
+	}
+	
+	.search1{
+		 width: 50%;
+	   	 margin: 4px auto;
+	     text-align: center;
+	     display: inline-block;
+	     margin-left: 20%;
+	     margin-right: auto;
+	     margin-top: 100px;
+	  	 border:0px;
+		
+	}
+	
+	.search1 #search_select{
+		width: 120px;
+	     font-size: 16px;
+	     height: 40px;
+	     margin-right: 0;
+	     float: left;
+	     box-sizing: border-box;
+	     transition: all 0.15s;
+	}
+	.search1 #search_submit{
+		 width: 80px;
+	     padding: 0px;
+	     font-size: 16px;
+	     height: 40px;
+	     margin-right: 0;
+	     float: left;
+	     box-sizing: border-box;
+	     transition: all 0.15s;
+	     margin-left: 10px;
+	     
+	}
+	.search1 #search_text{
+		width: 350px;
+	     padding: 15px 0 15px 20px;
+	     font-size: 16px;
+	     height: 35px;
+	     float: left;
+	     box-sizing: border-box;
+	     transition: all 0.15s;
+	     text-align: left;
+	     margin-left: 10px;
+	}
+	
 }
 </style>
 <%@include file="../main/Header.jsp" %>
@@ -83,6 +130,33 @@ button:hover {
 <%request.setCharacterEncoding("utf-8"); %>
 <div id="notice">
 <h2>&nbsp; 이벤트</h2><br>
+	<table class="search1" border="0">
+		<form action="searchQuery" method="post">
+			<tr >
+				<td><select id="search_select" name="query">
+					<option value="ESEQNO">번호</option>
+					<option value="ETITLE" selected="selected">제목</option>
+					<option value="ECONTENT">내용</option>
+				</select></td>
+				<td><input id="search_text" type="text" name="content" placeholder="검색어를 입력해주세요."></td>
+				<td><input id="search_submit" type="submit" value="검색"></td>
+			</tr>
+		</form>
+	</table>
+
+		<!-- 	<form action="searchQuery" method="post">
+				<select name="query" style="">
+					<option value="ESEQNO">번호</option>
+					<option value="ETITLE" selected="selected">제목</option>
+					<option value="STARTDATE">시작날짜</option>
+				</select>&nbsp;&nbsp;&nbsp;
+				<input type="text" name="content" size="50" />
+				<input type="submit" value="검색">
+			</form> -->
+	
+
+
+	<br/><br />
 
 	<table>
 		<tr>
@@ -93,10 +167,10 @@ button:hover {
 		</tr>
 		<c:forEach items="${eventList}" var="dto">
 			<tr>
-			<td>${dto.eSeqno}</td><!-- 번호 -->
+			<td align="center">${dto.eSeqno}</td><!-- 번호 -->
 				<td><a href = "eventViewUserDetail?eTitle=${dto.eTitle}&eSeqno=${dto.eSeqno}&eFilename=${dto.eFilename}&eContent=${dto.eContent}&startDate=${dto.startDate}&endDate=${dto.endDate}">${dto.eTitle}</a></td><!-- 제목 --> 
-				<td>${dto.startDate}</td><!-- 이벤트 시작 날짜 -->
-				<td>${dto.endDate}</td><!-- 이벤트 종료 날짜 -->
+				<td align="center">${dto.startDate}</td><!-- 이벤트 시작 날짜 -->
+				<td align="center">${dto.endDate}</td><!-- 이벤트 종료 날짜 -->
 			</tr>
 		</c:forEach>
 	</table>
@@ -110,12 +184,13 @@ button:hover {
 				
 			   <c:forEach var="i" begin="${startPage}" end="${endPage}" varStatus="cnt">
 			       <a href="./eventList?page=${i}">[
-			        <font color="#000000" />
+			        <!-- <font color="#000000" /> -->
 			          <c:if test="${currentPage == i}">
 			          <font color="#bbbbbb" />
 			        </c:if>
-			        ${i} ]
+			        ${i}
 			       </font>
+			        ]
 			       </a>
 			   </c:forEach> 
 				<c:if test="${endPage!=totalPage}">

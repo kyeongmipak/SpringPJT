@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mibbda.project.event.userparticipate.EventParticipateDao">
+
+	<insert id="participateInEvent">
+		INSERT INTO PARTICIPATE (EVENT_ESEQNO, USER_USERID) VALUES (#{param1 }, #{param2 })
+	</insert>
+	
+	<select id="paricipateResult" resultType="int">
+		SELECT COUNT(*) FROM PARTICIPATE WHERE EVENT_ESEQNO = #{param1 } AND USER_USERID = #{param2 }
+	</select>
+	
+</mapper>
