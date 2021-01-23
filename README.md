@@ -4,7 +4,7 @@
 1. Conroller
 2. Dto
 3. Dao
-- Mapper
+- Mapper Package 별도 구성
  1. Dao.xml
 
    
