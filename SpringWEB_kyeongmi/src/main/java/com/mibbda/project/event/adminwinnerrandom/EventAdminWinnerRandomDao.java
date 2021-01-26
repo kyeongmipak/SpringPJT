@@ -66,8 +66,8 @@ public class EventAdminWinnerRandomDao {
 	}
 	
 	public int getEventAllCount(String eSeqno) {
-		String sql = "select count(*) from participate where event_eSeqno = ?";
-
+		String sql = "select count(*) as count from participate where event_eSeqno = ?";
+		System.out.println("eno dao : " + eSeqno);
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet =null;
@@ -80,7 +80,8 @@ public class EventAdminWinnerRandomDao {
 
 			
 			if (resultSet.next()) {
-				NoticeCount=resultSet.getInt(1); // 전체 글 개수
+				NoticeCount=resultSet.getInt("count"); // 전체 글 개수
+				System.out.println("notice : " + NoticeCount);
 			} // if
 
 		} catch (SQLException e) {

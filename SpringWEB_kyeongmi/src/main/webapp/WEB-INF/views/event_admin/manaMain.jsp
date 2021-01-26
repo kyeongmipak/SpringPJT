@@ -117,7 +117,7 @@
 <body>
 
 <div id="wrap1">
-<h4>Copyright 2020. Web 5조 김대환, 김보람, 박지은, 이민우</h4>
+<h4>Copyright 2020. Web 5조 김대환, 김보람, 박경미, 박지은, 이민우</h4>
 <center>
 <h2>미쁘다 관리자 페이지</h2>
 </center>

@@ -98,7 +98,7 @@ height: 36px;
  <%
 	session.setAttribute("eSeqno", request.getParameter("eSeqno"));
 %>
-	<form action="insertWinEvent.five" method="post">
+	<form action="insertWinEvent?eSeqno=${eSeqno }" method="post">
 		<table>
 			<tr>
 				<div id="home3">

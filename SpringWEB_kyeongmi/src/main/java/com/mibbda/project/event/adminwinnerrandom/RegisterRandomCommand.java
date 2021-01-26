@@ -24,7 +24,7 @@ public class RegisterRandomCommand implements RandomCommand {
 		
 		EventAdminWinnerRandomDao dao = new EventAdminWinnerRandomDao();
 		
-		if(dao.WinnerList(eSeqno).size() == 0) {
+		if(dao.getEventAllCount(eSeqno) != 0) {
 		
 			String[] winnerName = new String[10];
 			for(int i =0 ; i<10;i++) {
@@ -37,7 +37,6 @@ public class RegisterRandomCommand implements RandomCommand {
 			
 			Random random = new Random();
 			int[] randomNumber = new int [10];
-			
 			int participant = dao.getEventAllCount(eSeqno);
 			System.out.println("범위 값 : " + participant);
 			
