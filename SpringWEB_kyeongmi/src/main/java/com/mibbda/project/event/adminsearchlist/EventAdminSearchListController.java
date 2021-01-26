@@ -1,7 +1,6 @@
-package com.mibbda.project.event.userview;
+package com.mibbda.project.event.adminsearchlist;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,23 +8,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mibbda.project.event.searchlist.EventSearchListDao;
 
 @Controller
-public class EventUserviewController {
+public class EventAdminSearchListController {
+
 	@Autowired 
 	private SqlSession sqlSession;
 	
 	
-	// 사용자 화면_이벤트 목록
-	@RequestMapping("eventList")
-	public String eventList(HttpServletRequest request, Model model, HttpSession session) {
-		/////////////////////////////////
-		// ID 수정 필요
-		/////////////////////////////////
-
-		session = request.getSession();
-		session.setAttribute("userId", "wldms");
-		String userId = (String) session.getAttribute("userId");
+	// 목록에서 조건 검색
+	@RequestMapping("searchQueryAdmin")
+	public String searchQuery(HttpServletRequest request, Model model) {
 		
 		//한 페이지당보여줄 글 갯수
 		final int pageSize=12;
@@ -36,14 +30,14 @@ public class EventUserviewController {
 		}
 
 		int startNum=((currentPage-1)*pageSize);
-		
-		// Event 목록 불러오기
-		EventUserviewDao dao = sqlSession.getMapper(EventUserviewDao.class);
-		model.addAttribute("eventList", dao.listDao(startNum, pageSize));
 				
-		//전체 글 갯수 구하기
-		int totalRow = dao.getBoardCount();
-		//전체 페이지 갯수       (전체글 개수-1)/페이지당 글 수+1   
+		// Event 목록 조건 검색
+		EventAdminSearchListDao dao = sqlSession.getMapper(EventAdminSearchListDao.class);
+		model.addAttribute("eventList", dao.searchQuery(request.getParameter("query"), request.getParameter("content"), startNum, pageSize));
+		
+		// 조회 글 갯수 구하기
+		int totalRow = dao.getBoardCount(request.getParameter("query"), request.getParameter("content"));
+		// 조회 글 전체 페이지 갯수       (전체글 개수-1)/페이지당 글 수+1   
 		int totalPage = (totalRow-1)/pageSize+1;  
 		
 		//페이지 그룹화  [1][2][3] [4][5][6] [7][8][9]  =>3페이지가 한그룹
@@ -62,8 +56,7 @@ public class EventUserviewController {
 		model.addAttribute("totalPage",new Integer(totalPage)); 
 		model.addAttribute("startPage",new Integer(startPage)); 
 		model.addAttribute("endPage",new Integer(endPage)); 
-
-		return "event_user/eventList";
 		
+		return "event_admin/manageEventList";
 	}
 }

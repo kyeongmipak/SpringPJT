@@ -15,6 +15,8 @@ public class EventParticipateController {
 	@Autowired 
 	private SqlSession sqlSession;
 	
+	
+	// 사용자 이벤트 참가
 	@RequestMapping("participateInEvent")
 	public String participateInEvent(HttpServletRequest request, Model model, HttpSession session) {
 		session = request.getSession();

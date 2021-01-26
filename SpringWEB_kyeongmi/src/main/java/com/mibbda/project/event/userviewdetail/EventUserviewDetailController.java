@@ -16,6 +16,7 @@ public class EventUserviewDetailController {
 	@Autowired 
 	private SqlSession sqlSession;
 	
+	// 사용자 화면_이벤트 상세페이지
 	@RequestMapping("eventViewUserDetail")
 	public String eventList(HttpServletRequest request, Model model, HttpSession session) {
 		session = request.getSession();

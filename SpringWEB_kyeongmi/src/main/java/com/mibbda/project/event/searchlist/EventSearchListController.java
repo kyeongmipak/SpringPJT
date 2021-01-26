@@ -14,6 +14,7 @@ public class EventSearchListController {
 	@Autowired 
 	private SqlSession sqlSession;
 	
+	// 사용자 화면_이벤트 목록 조건 검색
 	@RequestMapping("searchQuery")
 	public String searchQuery(HttpServletRequest request, Model model) {
 		//한 페이지당보여줄 글 갯수
