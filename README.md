@@ -5,7 +5,7 @@
 2. Dto
 3. Dao
 - Mapper Package 별도 구성
- 1. Dao.xml
+   1. Dao.xml
 
    
 ## Spring MyBatis 적용
